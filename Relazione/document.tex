@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[a4paper, left = 1.5cm, right = 1.5cm, top = 3.5cm, bottom = 3.5cm ]{geometry}
+\usepackage{minted}
+
+\begin{document}
+
+	
+	\begin{titlepage}
+		
+		\title{Progetto di Introduzione Intelligenza Artificiale\\Blocks World}
+		\author{Studente: Diego Arcelli\\Docente: Prof. Valentina Poggioni\\Assistenti alla didattica: Dr. Alina Elena Baia, Dr. Gabriele Di Bari}
+		\date{A.A. 2020/2021}
+		\maketitle
+		
+		\includegraphics[width=\linewidth]{./images/logo_unipg.png}
+		
+	\end{titlepage}
+	
+	\tableofcontents
+	\newpage
+	
+	\section{Descrizione del problema}
+	\subsection{Descrizione ad alto livello}
+	Blocks World è un dominio dell'intelligenza artificiale in cui si ha un insieme di blocchi numerati disposti su una superficie piana e un braccio meccanico che può spostare i blocchi. Si vuole realizzare un programma che implementi Blocks World acquisendo come input due immagini, una raffigurante la configurazione iniziale dei blocchi e l'altra raffigurante la configurazione finale, e restituisca come output la sequenza di azioni che il braccio deve effettuare per passare dalla configurazione iniziale alla configurazione finale.
+	
+	\subsection{Definizione formale e vincoli}
+	Il problema è stato definito specificando le seguenti proprietà e tenendo conto dei seguenti vincoli:
+	\begin{enumerate}
+		\item L'ambiente è un mondo 2-dimensionale di altezza e larghezza finita.
+		\item I blocchi sono quadrati tutti della stessa dimensione.
+		\item Altezza e larghezza della mappa sono multipli della lunghezza del lato dei blocchi.
+		\item L'altezza è supposta essere infinita.
+		\item La larghezza può essere scelta in maniera arbitraria.
+		\item La lunghezza degli spostamenti (orizzontali e verticali) deve essere un multiplo della dimensione del lato del blocco.
+		\item Un blocco deve necessariamente avere sotto di lui o la superficie del mondo o un altro blocco (è presente la forza di gravità).
+		\item Un blocco può essere preso dal braccio meccanico per essere spostato solo se sopra di lui non ha altri blocchi.
+		\item Il braccio meccanico può spostare un solo blocco alla volta.
+		\item Una volta scelto il blocco da spostare il braccio meccanico non può riposizionarlo nella stessa posizione da dove lo ha prelevato.
+	\end{enumerate}
+	I vincoli numero 1, 2, 3 e 4 possono anche essere interpretati nella seguente maniera: si può visualizzare l'ambiente come una griglia, dove ogni cella è di dimensione pari alla all'area dei blocchi. Gli spostamenti dei blocchi possono andare solo da una cella ad un altra (rispettando comunque il vincolo 5). Per rendere ancora più chiaro il concetto le immagini le figure 1 e 2 mostrano rispettivamente un esempio di stato valido e non valido.
+	\subsection{Struttura del programma}
+	Il programma realizzato per presentare un'implementazione di Blocks World è strutturato in tre moduli:
+	\begin{itemize}
+		\item Il primo fa uso del modulo AIMA di Python per modellizzare il problema, fornendo una rappresentazione degli stati che poi può essere utilizzata dagli algoritmi di ricerca per fornire una soluzione.
+		\item Il secondo fa uso della libreria per la manipolazione di immagini OpenCV per elaborare le immagini raffiguranti lo stato iniziale e finale, per fornire la rappresentazione dei blocchi da passare al modulo implementato con AIMA.
+		\item Il terzo si occupa dell'addestramento di una rete neurale convoluzionale, per il riconoscimento di cifre scritte a mano, facendo uso del dataset del MNIST. Tale modulo servirà a quello di OpenCV per interpretare le cifre scritte sui blocchi.
+	\end{itemize}
+	L'interazione tra l'utente ed il programma può avvenire sia mediante un'interfaccia grafica realizzata con il modulo di Python Tkinter o tramite uno script che può essere eseguito da linea di comando (la realizzazione non verrà descritta nella relazione in quanto non fanno parte del programma del corso).
+
+	\section{Statistiche addestramento rete neurale}
+	
+	
+\end{document}
