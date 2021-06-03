@@ -6,6 +6,8 @@ from utils import draw_state
 from blocks_world import BlocksWorld
 from search_algs import *
 
+# file che contiene l'implementazione dell'interfaccia grafica per utilizzare il programma
+
 class Window(tk.Frame):
 
 
@@ -37,12 +39,10 @@ class Window(tk.Frame):
         frame.grid(row = 1, column = 1, padx = 10, pady = 10)
 
         self.selected = tk.StringVar(self)
-        self.selected.set("A*")
-        select_alg_menu = tk.OptionMenu(frame, self.selected, "A*", "BFS", "DFS", command=self.read_algorithm).pack()
-        # select_alg_menu.grid(row = 1, column = 1, padx = 10, pady = 10)
+        self.selected.set("BFS")
+        select_alg_menu = tk.OptionMenu(frame, self.selected, "BFS", "DFS", "IDS", "UCS", "A*", "RBFS", command=self.read_algorithm).pack()
 
         start_button = tk.Button(frame, text="Start search", command=self.start_search).pack()
-        # start_button.grid(row = 1, column = 1, padx = 10, pady = 10)
 
 
     def create_images(self, initial, goal):
@@ -61,7 +61,7 @@ class Window(tk.Frame):
         self.initial_file = askopenfilename()
         if self.initial_file == ():
             return
-        self.initial_state = prepare_image(self.initial_file)
+        self.initial_state = prepare_image(self.initial_file, False)
         print(self.initial_state)
         draw_state(self.initial_state, "initial")
         self.create_images("/temp/initial.jpg", self.goal_image_path)
@@ -75,7 +75,7 @@ class Window(tk.Frame):
         self.goal_file = askopenfilename()
         if self.goal_file == ():
             return
-        self.goal_state = prepare_image(self.goal_file)
+        self.goal_state = prepare_image(self.goal_file, False)
         print(self.goal_state)
         draw_state(self.goal_state, "goal")
         self.create_images(self.initial_image_path, "/temp/goal.jpg")
@@ -86,14 +86,19 @@ class Window(tk.Frame):
             return
         alg = self.selected.get()
         problem = BlocksWorld(self.initial_state, self.goal_state)
+        print("Inizio ricerca:")
         if alg == "BFS":
-            print("Inizio ricerca:")
-            print(graph_bfs(problem).solution())
             problem.solution(graph_bfs(problem).solution())
         if alg  == "A*":
-            print("Inizio ricerca:")
-            print(a_star(problem, problem.misplaced_blocks).solution())
-            problem.solution(a_star(problem, problem.misplaced_blocks).solution())
+            problem.solution(a_star(problem, lambda n: problem.misplaced_blocks(n)).solution())
+        if alg == "DFS":
+            problem.solution(graph_dfs(problem).solution())
+        if alg  == "IDS":
+            problem.solution(ids(problem).solution())
+        if alg == "RBFS":
+            problem.solution(rbfs(problem, lambda n: problem.misplaced_blocks(n)).solution())
+        if alg == "UCS":
+            problem.solution(a_star(problem, lambda n: problem.depth(n)).solution())
 
             
 
