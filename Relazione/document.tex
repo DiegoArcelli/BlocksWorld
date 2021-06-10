@@ -81,7 +81,7 @@
 	\subsection{Struttura del programma}
 	Il programma realizzato per presentare un'implementazione di Blocks World è strutturato in tre moduli:
 	\begin{itemize}
-		\item Il primo fa uso del modulo AIMA di Python per modellizzare il problema, fornendo una rappresentazione degli stati che poi può essere utilizzata dagli algoritmi di ricerca per fornire una soluzione. I file che fanno riferimento a questo modulo sono: \verb*|blocks_world.py| e \verb*|search_algs.py|.
+		\item Il primo fa uso del modulo AIMA di Python per modellare il problema, fornendo una rappresentazione degli stati che poi può essere utilizzata dagli algoritmi di ricerca per fornire una soluzione. I file che fanno riferimento a questo modulo sono: \verb*|blocks_world.py| e \verb*|search_algs.py|.
 		\item Il secondo fa uso della libreria per la manipolazione di immagini OpenCV, per estrarre dalle immagini, raffiguranti la configurazione iniziale e la configurazione finale, la corretta rappresentazione degli stati da passare al modulo di AIMA. Il file che fa riferimento a questo modulo è \verb*|load_state.py|.
 		\item Il terzo si occupa dell'addestramento di una rete neurale convoluzionale, per il riconoscimento di cifre scritte a mano, facendo uso del dataset del MNIST. Tale modulo servirà a quello di OpenCV per interpretare le cifre scritte sui blocchi. Il file che fa riferimento a questo modulo è \verb*|cnn.py|.
 	\end{itemize}
@@ -103,7 +103,7 @@
 	\begin{minted}{python}
 ((1,0,0), (2,1,0), (3,0,2), (4,0,4), 6)
 	\end{minted}
-	Essa rappresenta lo stato raffigurato nella figura \ref{fig:state_ex}.
+	essa rappresenta lo stato raffigurato nella figura \ref{fig:state_ex}.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=8cm]{./images/example_state.png}
@@ -140,7 +140,7 @@
 	\begin{itemize}
 		\item I blocchi devono essere disegnati in un box rettangolare che serve all'algoritmo sia per facilitare la rilevazione dei blocchi, che per stabilire la larghezza del mondo.
 		\item I blocchi del livello più basso (quelli con altezza 0) devono essere appoggiati alla parte inferiore del box.
-		\item Ogni blocco deve aver disegnato al suo interno la cifra che lo identifica.
+		\item Ogni blocco deve avere disegnata al suo interno la cifra che lo identifica.
 		\item Tutte le linee disegnate devono essere continue.
 	\end{itemize}
 	
@@ -269,9 +269,9 @@
 	Gli algoritmi implementati sono i seguenti:
 	\begin{itemize}
 		\item Depth First Search (DFS)
-		\item Bredth First Search (BFS)
+		\item Breadth First Search (BFS)
 		\item Iterative Deepening Search (IDS)
-		\item Uiform Cost Search (UCS)
+		\item Uniform Cost Search (UCS)
 		\item Recursive Best First Search (RBFS)
 		\item A*
 	\end{itemize}
@@ -372,7 +372,7 @@
 		\label{fig:exp2}
 	\end{figure}
 	
-	Le due immagini vengono elaborate e codificate correttamente nei seguenti stati:
+	\noindent Le due immagini vengono elaborate e codificate correttamente nei seguenti stati:
 	\begin{minted}{python}
 	initial = ((1,0,0), (2,0,1), (3,1,1), (4,0,2), 3)
 	goal    = ((3,0,0), (4,0,1), (2,1,1), (1,0,2), 3)
@@ -417,7 +417,7 @@
 		\label{fig:exp3}
 	\end{figure}
 	
-	Le due immagini vengono elaborate e codificate correttamente nei seguenti stati:
+	\noindent Le due immagini vengono elaborate e codificate correttamente nei seguenti stati:
 	\begin{minted}{python}
    initial = ((1,0,0), (6,1,0), (5,0,1), (4,0,2), (2,0,3), (3,1,3), 4)
    goal    = ((1,0,0), (6,1,0), (3,2,0), (5,0,1), (4,1,1), (2,2,1), 4)
@@ -461,7 +461,7 @@
 		\label{fig:exp4}
 	\end{figure}
 	
-	Le due immagini vengono elaborate e codificate correttamente nei seguenti stati:
+	\noindent Le due immagini vengono elaborate e codificate correttamente nei seguenti stati:
 	\begin{minted}{python}
    initial = ((1,0,0), (6,1,0), (5,0,1), (4,0,2), (2,0,3), (3,1,3), 4)
    goal    = ((1,0,0), (6,1,0), (3,2,0), (5,0,1), (4,1,1), (2,2,1), 4)
@@ -533,20 +533,20 @@ goal    = ((3,0,2), (5,0,3), (4,1,3), (2,0,4), (1,1,4), (6,2,4), 6)
 	\subsubsection{Considerazioni sugli algoritmi di ricerca}
 	Per quanto riguarda gli algoritmi di ricerca si possono effettuare le seguenti considerazioni:
 	\begin{itemize}
-		\item La DFS, che ha una complessità in tempo più bassa degli altri algoritmi, tende ad avere una dimensione della frontiera (sia massima che media) ed un numero di nodi espansi più bassi rispetto a quella di altri algoritmi come la BFS e la UCS. Di contro la lunghezza delle soluzioni che trova sono esageratamente maggiori di quelle degli altri algoritmi, poiché la DFS non è ottimale neanche rispetto alla lunghezza della soluzione. Tutti gli altri algoritmi invece, quando trovano una soluzione trovano una soluzione ottimale (questo anche per come è stata definita la funzione di costo che rende la BFS ottimale).
-		\item BFS e UCS tendono ad avere prestazioni simili, in quanto la funzione di costo utilizzata dalla UCS ha costo unitario per ogni azione, quindi essenzialmente equivale ad una BFS, cambia solo il momento nel quale viene fatto il goal test (al momento dell'espansione nell'UCS e al momento della scoperta del nodo nella BFS). Inoltre, siccome entrambi gli algoritmi ricercano per livelli, e siccome la metrica utilizzata per la funzione di costo è la lunghezza della soluzione, entrambi gli algoritmi sono ottimali
+		\item La DFS, che ha una complessità in tempo più bassa degli altri algoritmi, tende ad avere una dimensione della frontiera (sia massima che media) ed un numero di nodi espansi più bassi rispetto a quella di altri algoritmi come la BFS e la UCS. Di contro la lunghezza delle soluzioni che trova sono esageratamente maggiori di quelle degli altri algoritmi, poiché la DFS non è ottimale neanche rispetto alla lunghezza della soluzione. Tutti gli altri algoritmi invece, quando trovano una soluzione, essa è sempre ottimale (questo anche per come è stata definita la funzione di costo che rende la BFS ottimale).
+		\item BFS e UCS tendono ad avere prestazioni simili, in quanto la funzione di costo utilizzata dalla UCS ha costo unitario per ogni azione, quindi essenzialmente equivale ad una BFS, cambia solo il momento nel quale viene fatto il goal test (al momento dell'espansione nell'UCS e al momento della scoperta del nodo nella BFS).
 		\item La complessità in spazio della IDS è $O(d)$ infatti dimensione massima e media della frontiera sono sempre più o meno simili alla lunghezza della soluzione. Di contro il numero di nodi espansi è elevatissimo in quanto l'albero di ricerca viene interamente espanso tutte le volte per le profondità che vanno da $0$ a $d-1$.
-		\item L'A* tende a far meglio in tutte le altre ricerche non informate, e la differenza è più marcata più è complessa l'istanza del mondo che si prende in esame.
+		\item A* e RBFS tendono a far meglio di tutte le altre ricerche non informate, e la differenza è più marcata più è complessa l'istanza del mondo che si prende in esame.
 		\item L'RBFS rispetto all'A* tende ad avere prestazioni migliori per quanto riguarda la memorizzazione (quindi la dimensione della frontiera), ma di contro il numero di nodi espansi è estremamente maggiore.
-		\item Un altro fatto interessante da notare è come nel quinto esperimento, sebbene l'A* espanda molti meno nodi della RBFS, quest'ultima impiega molto meno tempo a terminare la sua esecuzione. La stessa cosa avviene per UCS e BFS, che espandono un numero di nodi pressoché identico, ma la UCS spesso richiede qualche secondo si esecuzione in più. La spiegazione più sensata che ho trovato è che probabilmente ciò è causato da un overhead nel mantenere ordinata la coda di priorità in A* e UCS.
+		\item Un altro fatto interessante da notare è come nel quinto esperimento, sebbene l'A* espanda molti meno nodi della RBFS, quest'ultima impiega molto meno tempo a terminare la sua esecuzione. La stessa cosa avviene per UCS e BFS, che espandono un numero di nodi pressoché identico, ma la UCS spesso richiede qualche secondo di esecuzione in più. La spiegazione più sensata che ho trovato è che probabilmente ciò è causato da un overhead nel mantenere ordinata la coda di priorità in A* e UCS.
 	\end{itemize}
 
 	\subsubsection{Considerazioni generali}
-	Risulta evidente come in istanze del mondo più complesse, ovvero che richiedono soluzioni più lunghe o dove le possibile azioni ad ogni stato sono maggiori, tutti gli algoritmi falliscono nel trovare soluzioni in tempo fattibile. Quello che si comporta meglio è A*, che però può anche richiedere esecuzioni di diversi minuti prima di trovare una soluzione. La ragione di ciò probabilmente risiede sul come è stato modellato il problema, che nelle istanze più complesse fa esplodere la dimensione dello spazio degli stati, ad esempio, si consideri il seguente stato di larghezza 6:
+	Risulta evidente come in istanze del mondo più complesse, ovvero che richiedono soluzioni più lunghe o dove le possibile azioni ad ogni stato sono maggiori, tutti gli algoritmi falliscono nel trovare soluzioni in tempo fattibile. Quelli che si comportano meglio sono A* e RBFS, che però possono anche richiedere esecuzioni di diversi minuti prima di trovare una soluzione. La ragione di ciò probabilmente risiede sul come è stato modellato il problema, che nelle istanze più complesse fa esplodere la dimensione dello spazio degli stati. Per illustrare il perché con un esempio, si consideri il seguente stato di larghezza 6:
 	\begin{minted}{python}
 	((1,0,0), (2,0,1), (3,0,2), (4,0,3), (5,0,4), (6,0,5), 6)
 	\end{minted}
-	tutti blocchi sono disposti sulla superficie del mondo in maniera incrementale da sinistra verso destra. Ogni blocco può essere spostato sopra ognuno degli altri 5 blocchi, quindi le azioni possibili sono $5 \times 6 = 30$. Se si decide di prendere un qualsiasi blocco $x$ e spostarlo sopra un altro blocco $y$, il blocco $y$ non potrà più essere spostato, mentre gli altri 5 blocchi potranno essere spostati, ognuno in 5 possibili posizioni, quindi si hanno $5 \times 5 = 25$ possibili azioni, e, tenendo in considerazione il percorso dallo stato di partenza, le sequenze di azioni possibili in totale sono $30 \times 25 = 750$. Si supponga ora di prendere un terzo blocco $z$ e di porlo dove nel primo stato era posizionato $x$, ragionando come prima anche in questo caso si hanno $5 \times 5 = 25$ possibili azioni nello stato, per un totale di $30 \times 25 \times 25 = 18750$ possibili azioni. Si supponga ora di riporre $x$ dove nello stato originale si trovava $z$, si ritorna in una configurazione come quella iniziale ma con $x$ e $z$ invertiti di posizione, quindi si hanno di nuovo $5 \times 6 = 30$ possibili azioni, per un totale di $30 \times 25 \times 25 \times 30 = 562500$. Quindi dovendo scegliere solo tra 4 possibili azioni si hanno più di 500 mila possibili opzioni, pertanto è evidente come basta poco per creare uno spazio degli stati intrattabilmente grande. Una possibile soluzione per risolvere il problema potrebbe essere quella di definire una funzione euristica migliore di quella utilizzata, in quanto utilizzando il numero di blocchi in posizione errata il valore massimo della funzione è pari al numero di blocchi presenti nel mondo, quando la soluzione con il minor numero di azioni può essere anche molto più lunga.
+	tutti blocchi sono disposti sulla superficie del mondo in maniera incrementale da sinistra verso destra. Ogni blocco può essere spostato sopra ognuno degli altri 5 blocchi, quindi le azioni possibili sono $5 \times 6 = 30$. Se si decide di prendere un qualsiasi blocco $x$ e spostarlo sopra un altro blocco $y$, il blocco $y$ non potrà più essere spostato, mentre gli altri 5 blocchi potranno essere spostati, ognuno in 5 possibili posizioni, quindi si hanno $5 \times 5 = 25$ possibili azioni e, tenendo in considerazione il percorso dallo stato di partenza, le sequenze di azioni possibili in totale sono $30 \times 25 = 750$. Si supponga ora di prendere un terzo blocco $z$ e di porlo dove nel primo stato era posizionato $x$, ragionando come prima anche in questo caso si hanno $5 \times 5 = 25$ possibili azioni nello stato, per un totale di $30 \times 25 \times 25 = 18750$ possibili azioni. Si supponga ora di riporre $x$ dove nello stato originale si trovava $z$, si ritorna in una configurazione come quella iniziale ma con $x$ e $z$ invertiti di posizione, quindi si hanno di nuovo $5 \times 6 = 30$ possibili azioni, per un totale di $30 \times 25 \times 25 \times 30 = 562500$.\\Quindi dall'esempio risulta evidente come basta poco per creare uno spazio degli stati intrattabilmente grande. Un possibile modo per rendere più efficiente l'esecuzione del programma potrebbe essere quello di definire una migliore funzione euristica, in quanto, utilizzando il numero di blocchi in posizione errata, il valore massimo della funzione è pari al numero di blocchi presenti nell'istanza del mondo, quando la soluzione con il minor numero di azioni potrebbe essere anche più lunga.
 	
 	\section{Uso del programma}
 	\subsection{Linea di comando}
